@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
+import FormInput from '../form-input/form-input';
 
 
 const defaltformFields = {
@@ -49,17 +50,18 @@ const SingUpForm = () => {
     <div>
         <h1>Sing up with youre email and password</h1>
         <form onSubmit={handlSubmit}>
-            <label>Display Name</label>
-            <input
-                onChange={handlChenge}
+            <FormInput
+                label='Display name'
                 type='text'
+                onChange={handlChenge}
                 required
-                name='displayName'
+                name='Display name'
                 value={displayName}
+                
             />
 
-            <label>Email</label>
-            <input
+            <FormInput
+                label='Email'
                 onChange={handlChenge}
                 type='email'
                 required
@@ -67,8 +69,8 @@ const SingUpForm = () => {
                 value={email}
             />
 
-            <label>Password</label>
-            <input
+            <FormInput
+                label='Password'
                 onChange={handlChenge}
                 type='password'
                 required
@@ -76,8 +78,8 @@ const SingUpForm = () => {
                 value={password}
             />
 
-            <label>Confirm password</label>
-            <input
+            <FormInput
+                label='Confirm Password'
                 onChange={handlChenge}
                 type='password'
                 required
