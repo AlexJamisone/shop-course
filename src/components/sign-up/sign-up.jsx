@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
+import Button from '../button/button';
 import FormInput from '../form-input/form-input';
 
+import './sing-up.scss'
 
 const defaltformFields = {
     displayName: '',
@@ -23,7 +25,7 @@ const SingUpForm = () => {
         if(password !== confirmPassword) {
             alert('password do not match')
             return;
-        }
+        } 
         try {
             const { user } = await createAuthUserWithEmailAndPassword(
                 email,
@@ -47,8 +49,9 @@ const SingUpForm = () => {
     };
 
     return (
-    <div>
-        <h1>Sing up with youre email and password</h1>
+    <div className='sing-up-container '>
+        <h2>Don't have an account?</h2>
+        <span>Sing up with youre email and password</span>
         <form onSubmit={handlSubmit}>
             <FormInput
                 label='Display name'
@@ -57,7 +60,6 @@ const SingUpForm = () => {
                 required
                 name='Display name'
                 value={displayName}
-                
             />
 
             <FormInput
@@ -86,7 +88,7 @@ const SingUpForm = () => {
                 name='confirmPassword'
                 value={confirmPassword}
             />
-            <button type='submit'>Sign Up</button>
+            <Button type='submit' children='Sing up'/>
         </form>
     </div>
     )
