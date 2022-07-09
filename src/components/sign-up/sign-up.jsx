@@ -55,10 +55,10 @@ const SingUpForm = () => {
         <form onSubmit={handlSubmit}>
             <FormInput
                 label='Display name'
-                type='text'
                 onChange={handlChenge}
+                type=''
                 required
-                name='Display name'
+                name='displayName'
                 value={displayName}
             />
 
@@ -73,9 +73,9 @@ const SingUpForm = () => {
 
             <FormInput
                 label='Password'
-                onChange={handlChenge}
                 type='password'
                 required
+                onChange={handlChenge}
                 name='password'
                 value={password}
             />
