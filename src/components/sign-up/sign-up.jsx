@@ -16,6 +16,7 @@ const SingUpForm = () => {
     const [formFields, setformFields] = useState(defaltformFields);
     const {displayName, email, password, confirmPassword} = formFields;
 
+
     const resetFields = () => {
         setformFields(defaltformFields)
     }
