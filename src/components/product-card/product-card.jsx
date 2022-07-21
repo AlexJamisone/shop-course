@@ -1,15 +1,15 @@
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { addItemToCart } from '../../store/cart/cart.action';
+import { selecCartItems } from '../../store/cart/cart.selection';
 import Button from '../button/button'
 
-
-import { CartContext } from '../../context/cart.context'
 import './product-card.scss'
 
 const ProductCard = ({ product }) => {
+    const dispatch = useDispatch()
     const {name, imageUrl, price} = product;
-    const { addItemToCart } = useContext(CartContext)
-
-    const addProducToCart = () => addItemToCart(product)
+    const cartItems = useSelector(selecCartItems)
+    const addProducToCart = () => dispatch(addItemToCart(cartItems,product))
 
     return (
         <div className='product-card-container'>
