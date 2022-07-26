@@ -1,9 +1,9 @@
 import './spinner.scss'
 
-const Spinner = () => {
+const Spinner = ({mainLoad, modifi}) => {
   return (
     <div className='spinner-overlay'>
-        <div className="spinner-container"/>
+        <div className={`${mainLoad} ${modifi}`}/>
     </div>
   )
 }

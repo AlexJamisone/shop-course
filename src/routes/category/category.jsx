@@ -28,7 +28,7 @@ const Category = () => {
             <h2 className="category-title">{category}</h2>
             {
                 isLoading ? (
-                    <Spinner/>
+                    <Spinner mainLoad='spinner-container'/>
                 ) : (
                     <div className='category-container'>
                         {   products &&
