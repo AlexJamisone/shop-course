@@ -9,7 +9,7 @@ const CategorisPreview = () => {
     return (
         <>
         { isLoading ? (
-            <Spinner/>
+            <Spinner mainLoad='spinner-container'/>
         ) :
             (Object.keys(categoriesMap).map(title => {
                 const products = categoriesMap[title]
