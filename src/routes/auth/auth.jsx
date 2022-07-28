@@ -1,13 +1,12 @@
-import SingUpForm from '../../components/sign-up/sign-up';
-import SignInForm from '../../components/sign-in/sign-in';
+import SingUpForm from '../../components/sign-up/sign-up'
+import SignInForm from '../../components/sign-in/sign-in'
 import './auth.scss'
 
 const Auth = () => {
-
 	return (
-		<div className='auth-container'>
-            <SignInForm/>
-            <SingUpForm/>
+		<div className="auth-container">
+			<SignInForm />
+			<SingUpForm />
 		</div>
 	)
 }

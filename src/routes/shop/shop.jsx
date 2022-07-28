@@ -8,17 +8,17 @@ import Category from '../category/category'
 import './shop.scss'
 
 const Shop = () => {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchCategoriesStart())
-    }, [])
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(fetchCategoriesStart())
+	}, [])
 
-    return (
-            <Routes>
-                <Route index element={<CategorisPreview/>}/>
-                <Route path=':category' element={<Category/>}/>
-            </Routes>
-    )
+	return (
+		<Routes>
+			<Route index element={<CategorisPreview />} />
+			<Route path=":category" element={<Category />} />
+		</Routes>
+	)
 }
 
 export default Shop

@@ -1,17 +1,24 @@
 //Saga
-import { takeLatest, put, call, all } from "redux-saga/effects";
+import {
+    takeLatest,
+    put,
+    call,
+    all
+} from "redux-saga/effects";
 //User Action
-import { USER_ACTION_TYPE } from "./user.types";
-import { 
+import {
+    USER_ACTION_TYPE
+} from "./user.types";
+import {
     signInSuccess,
     signInFaild,
     signUpFaild,
     signUpSuccess,
     signOutSuccess,
-    signOutFaild 
+    signOutFaild
 } from "./user.action";
 //Firebase
-import { 
+import {
     getCurrentUser,
     createUserDocumentFromAuth,
     signInWithGooglePopup,
@@ -27,7 +34,10 @@ export function* getSnapshopFromUserAuth(userAuth, additionalDetails) {
             userAuth,
             additionalDetails
         )
-        yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data()}))
+        yield put(signInSuccess({
+            id: userSnapshot.id,
+            ...userSnapshot.data()
+        }))
     } catch (error) {
         yield put(signInFaild(error))
     }
@@ -35,16 +45,25 @@ export function* getSnapshopFromUserAuth(userAuth, additionalDetails) {
 
 export function* signInWithGoogle() {
     try {
-        const {user} = yield call(signInWithGooglePopup)
+        const {
+            user
+        } = yield call(signInWithGooglePopup)
         yield call(getSnapshopFromUserAuth, user)
     } catch (error) {
         yield put(signInFaild(error))
     }
 }
 
-export function* signInWithEmailAndPassword({payload: {email, password}}) {
+export function* signInWithEmailAndPassword({
+    payload: {
+        email,
+        password
+    }
+}) {
     try {
-        const { user } = yield call(
+        const {
+            user
+        } = yield call(
             signInAuthUserWithEmailAndPassword,
             email,
             password
@@ -55,14 +74,24 @@ export function* signInWithEmailAndPassword({payload: {email, password}}) {
     }
 }
 
-export function* signUp({payload: {email, password, displayName}}) {
+export function* signUp({
+    payload: {
+        email,
+        password,
+        displayName
+    }
+}) {
     try {
-        const { user } = yield call(
+        const {
+            user
+        } = yield call(
             createAuthUserWithEmailAndPassword,
             email,
             password
         )
-        yield put(signUpSuccess(user, {displayName}))
+        yield put(signUpSuccess(user, {
+            displayName
+        }))
     } catch (error) {
         yield put(signUpFaild(error))
     }
@@ -80,14 +109,19 @@ export function* signOut() {
 export function* isUserAuth() {
     try {
         const userAuth = yield call(getCurrentUser)
-        if(!userAuth) return
+        if (!userAuth) return
         yield call(getSnapshopFromUserAuth, userAuth)
     } catch (error) {
         yield put(signUpFaild(error))
     }
 }
 
-export function* signInAfterSignUp({payload: {user, additionalDetails}}) {
+export function* signInAfterSignUp({
+    payload: {
+        user,
+        additionalDetails
+    }
+}) {
     yield call(getSnapshopFromUserAuth, user, additionalDetails)
 }
 
