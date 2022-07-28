@@ -1,5 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { 
+import {
+    initializeApp
+} from "firebase/app";
+import {
     getAuth,
     signInWithPopup,
     GoogleAuthProvider,
@@ -26,8 +28,8 @@ const firebaseConfig = {
     storageBucket: "shop-course-92be2.appspot.com",
     messagingSenderId: "499929262048",
     appId: "1:499929262048:web:a52e1e2f4cd1976303ad85"
-  };
-  
+};
+
 const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
@@ -66,14 +68,17 @@ export const createUserDocumentFromAuth = async (
     userAuth,
     additionalInformation = {}
 ) => {
-    if(!userAuth) return;
+    if (!userAuth) return;
 
     const userDocRef = doc(db, 'users', userAuth.uid)
 
     const userSnapshot = await getDoc(userDocRef)
-    
-    if(!userSnapshot.exists()) {
-        const { displayName, email } = userAuth;
+
+    if (!userSnapshot.exists()) {
+        const {
+            displayName,
+            email
+        } = userAuth;
         const createdAt = new Date();
 
         try {
@@ -87,23 +92,23 @@ export const createUserDocumentFromAuth = async (
             console.log(`error creating the user`, error.message)
         }
     }
-    
+
     return userSnapshot;
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-    if(!email || !password) return;
+    if (!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password)
-} 
+}
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-    if(!email || !password) return;
+    if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password)
-} 
+}
 
 export const signOutUser = async () => await signOut(auth)
 
-export const onAuthStateChangedListener = (callback) => 
+export const onAuthStateChangedListener = (callback) =>
     onAuthStateChanged(auth, callback)
 
 export const getCurrentUser = () => {
