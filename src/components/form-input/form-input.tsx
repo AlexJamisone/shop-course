@@ -1,8 +1,12 @@
-import React from 'react'
-
+import { FC, InputHTMLAttributes } from 'react'
 import './form-input.scss'
 
-const FormInput = ({ label, ...otherProps }) => {
+type FormInputProps = {
+	label?: string
+	value: string
+} & InputHTMLAttributes<HTMLInputElement>
+
+const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
 	return (
 		<div className="group">
 			<input className="form-input" {...otherProps} />

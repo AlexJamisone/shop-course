@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import Button from '../button/button';
 import FormInput from '../form-input/form-input';
@@ -23,7 +24,7 @@ const SingUpForm = () => {
         setformFields(defaltformFields)
     }
 
-    const handlSubmit = async (e) => {
+    const handlSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(password !== confirmPassword) {
             alert('password do not match')
@@ -33,7 +34,7 @@ const SingUpForm = () => {
             dispatch(signUpStart(email, password, displayName))
             resetFields();
         } catch (error) {
-            if(error.code === 'auth/email-already-in-use') {
+            if((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
                 alert('Cannot create userm email already in use')
             } else {
                 console.log(`error with submitForm`, error);
@@ -41,7 +42,7 @@ const SingUpForm = () => {
         }
     }
 
-    const handlChenge = (e) => {
+    const handlChenge = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
         setformFields({...formFields, [name]: value})
