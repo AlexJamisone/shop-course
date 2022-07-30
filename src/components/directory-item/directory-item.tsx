@@ -1,7 +1,13 @@
+import { FC } from 'react'
+import { MenuCategory } from '../menu/menu'
 import { useNavigate } from 'react-router-dom'
 import './directory-item.scss'
 
-const DirectoryItem = ({ category }) => {
+type DirectoryItemProps = {
+	category: MenuCategory
+}
+
+const DirectoryItem: FC<DirectoryItemProps> = ({ category }) => {
 	const { imageUrl, title, route } = category
 	const navigate = useNavigate()
 

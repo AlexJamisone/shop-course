@@ -11,8 +11,12 @@ import ProductCard from '../../components/product-card/product-card'
 
 import './category.scss'
 
+type CategoruRouteParams = {
+	category: string
+}
+
 const Category = () => {
-	const { category } = useParams()
+	const { category } = useParams<keyof CategoruRouteParams>() as CategoruRouteParams
 	const categoriesMap = useSelector(selectCategoriesMap)
 	const isLoading = useSelector(selectCategoriesIsLoading)
 	const [products, setProducts] = useState(categoriesMap[category])
@@ -25,7 +29,7 @@ const Category = () => {
 		<>
 			<h2 className="category-title">{category}</h2>
 			{isLoading ? (
-				<Spinner mainLoad="spinner-container" />
+				<Spinner/>
 			) : (
 				<div className="category-container">
 					{products &&

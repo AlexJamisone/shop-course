@@ -12,7 +12,7 @@ const CategorisPreview = () => {
 	return (
 		<>
 			{isLoading ? (
-				<Spinner mainLoad="spinner-container" />
+				<Spinner/>
 			) : (
 				Object.keys(categoriesMap).map((title) => {
 					const products = categoriesMap[title]

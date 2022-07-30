@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
+import { AuthError, AuthErrorCodes } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
-import Button from '../button/button'
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button'
 import FormInput from '../form-input/form-input'
 import {
 	googleSignInStart,
@@ -26,18 +27,18 @@ const SignInForm = () => {
 		dispatch(googleSignInStart())
 	}
 
-	const handlSubmit = async (e) => {
+	const handlSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		try {
 			dispatch(emailSignInStart(email, password))
 			resetFields()
 		} catch (error) {
-			switch (error.code) {
-				case 'auth/wrong-password':
-					alert('incorrect password for email')
+			switch ((error as AuthError).code) {
+				case AuthErrorCodes.INVALID_PASSWORD:
+					alert('incorrect password or email')
 					break
-				case 'auth/user-not-found':
+				case AuthErrorCodes.EMAIL_EXISTS:
 					alert('no user associated with this email')
 					break
 				default:
@@ -46,7 +47,7 @@ const SignInForm = () => {
 		}
 	}
 
-	const handlChenge = (e) => {
+	const handlChenge = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 
 		setFormFields({ ...formFields, [name]: value })
@@ -78,7 +79,7 @@ const SignInForm = () => {
 					<Button
 						onClick={signInWithGoogle}
 						children="Sign In With Google"
-						buttonType="google"
+						buttonType={BUTTON_TYPE_CLASSES.google}
 						type="button"
 					/>
 				</div>
