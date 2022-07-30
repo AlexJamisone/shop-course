@@ -1,7 +1,15 @@
+import { Key } from 'react';
 import DirectoryItem from '../directory-item/directory-item';
 import './menu.scss'
 
-const categories = [
+export type MenuCategory = {
+    id: Key
+    title: string
+    imageUrl: string
+    route: string
+}
+
+const categories: MenuCategory[] = [
     {
         "id": 1,
         "title": "hats",
