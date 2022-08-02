@@ -2,11 +2,6 @@ import { useEffect, lazy, Suspense  } from "react";
 import { useDispatch } from 'react-redux'
 
 import { Routes, Route } from "react-router-dom";
-// import Navigation from "./routes/navigation/navigation";
-// import Home from './routes/home/home';
-// import Auth from "./routes/auth/auth";
-// import Shop from './routes/shop/shop'
-// import Checkout from "./routes/checkout/checkout";
 import Spinner from "./components/spinner/spinner";
 import { checkUserSession } from "./store/user/user.action";
 
